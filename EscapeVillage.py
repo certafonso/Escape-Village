@@ -60,7 +60,14 @@ class Client(discord.Client):
 				if message.content.split()[0] == "-submit":
 					await self.task_submission(message.guild, team, message)
 
-			
+				if message.content.split()[0] == "-extra":
+					try:
+						await self.select_extra(message.guild, team, int(message.content.split()[1]))
+					except ValueError:
+						await message.channel.send(f"{message.content.split()[1]} não é um numero")
+
+					except IndexError:
+						await message.channel.send("Tem de especificar um desafio extra")
 
 	def get_guild(self, gamemaster):
 		""" Checks if a user is the gamemaster of some guild, returns the guild."""
@@ -131,6 +138,7 @@ class Client(discord.Client):
 				"voice": voice,
 				"current_stage": 0,
 				"current_task": 0,
+				"current_extra": 0,
 				"extras_done": []
 			})
 
@@ -161,11 +169,10 @@ class Client(discord.Client):
 		for team in self.running_games[str(guild.id)]["teams"]:
 			await team["text"].send(message)
 
-	async def send_task(self, guild, team):
-		"""Sends the next task to a team"""
+	def get_task(self, task):
+		""" Returns the text of a task """
 
-		task = self.game[team["current_stage"]]["tasks"][team["current_task"]]
-
+		# add task text
 		message = task["text"]
 
 		# add help text
@@ -178,15 +185,64 @@ class Client(discord.Client):
 		elif task["type"] == "location":
 			message += "\nDevem submeter as coordenadas do local usando `-submit XX.XXXXX, XX.XXXXX`"
 
+		return message
+	
+	async def send_task(self, guild, team):
+		"""Sends the next task to a team"""
+
+		task = self.game[team["current_stage"]]["tasks"][team["current_task"]]
+
+		message = self.get_task(task)
+		
+		# check if extra tasks are unlocked
+		if team["current_task"] > self.game[team["current_stage"]]["extra available"]:
+			message += "\nExtras disponiveis:"
+			for i in range(1, len(self.game[team["current_stage"]]["extra"]) + 1):
+				# check if task was completed
+				if i + team["current_stage"] * 10 not in team["extras_done"]:
+					message += f"\n	{i} " + self.game[team["current_stage"]]["extra"][i - 1]["category"]
+			
+			message += "\n Para selecionar um desafio extra usar `-extra [numero do desafio]`"
+
+		await team["text"].send(message)
+
+	async def select_extra(self, guild, team, extra):
+		""" Selects an extra task """
+		
+		if team["current_extra"] != 0:
+			message = "Não podem selecionar dois extras ao mesmo tempo"
+
+		else:
+			if extra > len(self.game[team["current_stage"]]["extra"]) or extra <= 0:
+				message = f"{extra} não é um desafio extra válido"
+
+			elif extra + team["current_stage"] * 10 in team["extras_done"]:
+				message = "Não podem escolher o mesmo desafio duas vezes"
+
+			else:
+				team["current_extra"] = extra
+
+				task = self.game[team["current_stage"]]["extra"][extra - 1]
+
+				message = f"Selecionaram o desafio extra {extra}\n" + self.get_task(task)
+
 		await team["text"].send(message)
 
 	async def task_submission(self, guild, team, submission):
 		"""Handles the submission o a task"""
 
 		current_stage = team["current_stage"]
-		current_task = team["current_task"]
 
-		task = self.game[current_stage]["tasks"][current_task]
+		extra = team["current_extra"] + current_stage * 10
+
+		if extra != 0:
+			current_task = team["current_extra"]
+			task = self.game[current_stage]["extra"][team["current_extra"] - 1]
+			gm_message = f"{submission.channel.name}: Extra {extra}\n"
+		else:
+			current_task = team["current_task"]
+			task = self.game[current_stage]["tasks"][current_task]
+			gm_message = f"{submission.channel.name}: Task {current_task} of stage {current_stage}\n"
 
 		accepted = False
 
@@ -197,7 +253,7 @@ class Client(discord.Client):
 		# handle the correct type of task
 		if task["type"] == "photo":
 
-			await gamemaster.send(f"Submission for task {current_task} of stage {current_stage} from {submission.channel.name}\n" + submission.attachments[0].url)
+			gm_message += submission.attachments[0].url
 
 			accepted = True
 
@@ -216,7 +272,7 @@ class Client(discord.Client):
 				else:
 					message += "Resposta errada."
 				
-				await gamemaster.send(f"Submission for task {current_task} of stage {current_stage} from {submission.channel.name}:\n `{submission.content.split()[1]}` Error: `{error}` Tolerance: `{tolerance}` Accepted: {accepted}")
+				gm_message += f"`{submission.content.split()[1]}` Error: `{error}` Tolerance: `{tolerance}` Accepted: {accepted}"
 
 			except ValueError:
 				message += f"{submission.content.split()[1]} não é um numero."
@@ -233,7 +289,7 @@ class Client(discord.Client):
 			else:
 				message += "Resposta errada."
 			
-			await gamemaster.send(f"Submission for task {current_task} of stage {current_stage} from {submission.channel.name}:\n Answer: `{guess}` Correct Answer: `{answer}` Accepted: `{accepted}`")
+			gm_message += f"Answer: `{guess}` Correct Answer: `{answer}` Accepted: `{accepted}`"
 		
 		elif task["type"] == "location":
 
@@ -254,16 +310,26 @@ class Client(discord.Client):
 			else:
 				message += "Resposta errada."
 			
-			await gamemaster.send(f"Submission for task {current_task} of stage {current_stage} from {submission.channel.name}:\n Answer: `{guess}` Error: `{error}` Tolerance: `{tolerance}` Accepted: `{accepted}`")
+			gm_message += f"Answer: `{guess}` Error: `{error}` Tolerance: `{tolerance}` Accepted: `{accepted}`"
 
-		if accepted:		
-			message += "\n A enviar o próximo desafio..."
-			team["current_task"] += 1
-			
-			if team["current_task"] >= len(self.game[team["current_stage"]]["tasks"]):
-				team["current_task"] = 0
-				team["current_stage"] += 1
+		if accepted:
+			# is not an extra task
+			if extra == 0:
+				message += "\n A enviar o próximo desafio..."
+				team["current_task"] += 1
+				
+				# last task of a stage
+				if team["current_task"] >= len(self.game[team["current_stage"]]["tasks"]):
+					team["current_task"] = 0
+					team["current_stage"] += 1
 
+			# is an extra task
+			else:
+				message += f"\n Concluido o desafio extra {extra}"
+				team["extras_done"].append(extra)
+				team["current_extra"] = 0
+		
+		await gamemaster.send(gm_message)
 		await team["text"].send(message)
 
 		if accepted:
