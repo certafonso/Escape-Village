@@ -69,6 +69,9 @@ class Client(discord.Client):
 					except IndexError:
 						await message.channel.send("Tem de especificar um desafio extra")
 
+				if message.author == self.running_games[str(message.guild.id)]["gamemaster"] and message.content.split()[0] == "-skip":
+					await self.next_task(message.guild, team)
+
 	def get_guild(self, gamemaster):
 		""" Checks if a user is the gamemaster of some guild, returns the guild."""
 
@@ -139,7 +142,8 @@ class Client(discord.Client):
 				"current_stage": 0,
 				"current_task": 0,
 				"current_extra": 0,
-				"extras_done": []
+				"extras_done": [],
+				"extra_step": 0
 			})
 
 		self.running_games[str(game["guild"].id)] = game
@@ -177,7 +181,7 @@ class Client(discord.Client):
 
 		# add help text
 		if task["type"] == "photo":
-			message += "\nDevem submeter uma imagem usando `-submit`"
+			message += "\nDevem submeter um ficheiro usando `-submit`"
 		elif task["type"] == "int":
 			message += "\nDevem submeter um numero inteiro usando `-submit XXX`"
 		elif task["type"] == "string":
@@ -190,26 +194,30 @@ class Client(discord.Client):
 	async def send_task(self, guild, team):
 		"""Sends the next task to a team"""
 
-		task = self.game[team["current_stage"]]["tasks"][team["current_task"]]
+		if team["current_extra"] % 10 != 0:
+			task = self.game[team["current_stage"]]["extra"][team["current_extra"] - 1]["tasks"][team["extra_step"]]
+		else:
+			task = self.game[team["current_stage"]]["tasks"][team["current_task"]]
 
 		message = self.get_task(task)
 		
-		# check if extra tasks are unlocked
-		if team["current_task"] > self.game[team["current_stage"]]["extra available"]:
-			message += "\nExtras disponiveis:"
-			for i in range(1, len(self.game[team["current_stage"]]["extra"]) + 1):
-				# check if task was completed
-				if i + team["current_stage"] * 10 not in team["extras_done"]:
-					message += f"\n	{i} " + self.game[team["current_stage"]]["extra"][i - 1]["category"]
-			
-			message += "\n Para selecionar um desafio extra usar `-extra [numero do desafio]`"
+		if team["current_extra"] % 10 == 0:
+			# check if extra tasks are unlocked
+			if team["current_task"] > self.game[team["current_stage"]]["extra available"]:
+				message += "\nExtras disponiveis:"
+				for i in range(1, len(self.game[team["current_stage"]]["extra"]) + 1):
+					# check if task was completed
+					if i + team["current_stage"] * 10 not in team["extras_done"]:
+						message += f"\n	{i} " + self.game[team["current_stage"]]["extra"][i - 1]["category"]
+				
+				message += "\n Para selecionar um desafio extra usar `-extra [numero do desafio]`"
 
 		await team["text"].send(message)
 
 	async def select_extra(self, guild, team, extra):
 		""" Selects an extra task """
 		
-		if team["current_extra"] != 0:
+		if team["current_extra"] % 10 != 0:
 			message = "Não podem selecionar dois extras ao mesmo tempo"
 
 		else:
@@ -221,8 +229,9 @@ class Client(discord.Client):
 
 			else:
 				team["current_extra"] = extra
+				team["extra_step"] = 0
 
-				task = self.game[team["current_stage"]]["extra"][extra - 1]
+				task = self.game[team["current_stage"]]["extra"][extra - 1]["tasks"][0]
 
 				message = f"Selecionaram o desafio extra {extra}\n" + self.get_task(task)
 
@@ -235,10 +244,11 @@ class Client(discord.Client):
 
 		extra = team["current_extra"] + current_stage * 10
 
-		if extra != 0:
+		if extra % 10 != 0:
 			current_task = team["current_extra"]
-			task = self.game[current_stage]["extra"][team["current_extra"] - 1]
-			gm_message = f"{submission.channel.name}: Extra {extra}\n"
+			step = team["extra_step"]
+			task = self.game[team["current_stage"]]["extra"][team["current_extra"] - 1]["tasks"][team["extra_step"]]
+			gm_message = f"{submission.channel.name}: Extra {extra} step {step}\n"
 		else:
 			current_task = team["current_task"]
 			task = self.game[current_stage]["tasks"][current_task]
@@ -255,24 +265,37 @@ class Client(discord.Client):
 
 			gm_message += submission.attachments[0].url
 
-			accepted = True
+			if task["validation_needed"]:
+				gm_message += "\n** validation needed ** (`-skip` in team chat)"
+				message += "Esperem que a vossa resposta seja avaliada..."
 
-			message += "A vossa foto foi aceite."
+			else:
+				accepted = True
+				message += "A vossa foto foi aceite."
 
 		elif task["type"] == "int":
 
 			try:
-				error = abs(int(submission.content.split()[1]) - task["answer"])
+				guess = int(submission.content.split()[1])
+				answer = task["answer"]
 				tolerance = task["tolerance"] 
-				
-				if error <= tolerance:
+
+				if answer == None:
 					accepted = True
-					message += "Resposta aceite!"
+					message += "Resposta registada!"
+					gm_message += f"`{guess}` Accepted: {accepted}"
 
 				else:
-					message += "Resposta errada."
-				
-				gm_message += f"`{submission.content.split()[1]}` Error: `{error}` Tolerance: `{tolerance}` Accepted: {accepted}"
+					error = abs(guess - answer)
+					
+					if error <= tolerance:
+						accepted = True
+						message += "Resposta aceite!"
+
+					else:
+						message += "Resposta errada."
+					
+					gm_message += f"`{guess}` Error: `{error}` Tolerance: `{tolerance}` Accepted: {accepted}"
 
 			except ValueError:
 				message += f"{submission.content.split()[1]} não é um numero."
@@ -313,27 +336,47 @@ class Client(discord.Client):
 			gm_message += f"Answer: `{guess}` Error: `{error}` Tolerance: `{tolerance}` Accepted: `{accepted}`"
 
 		if accepted:
-			# is not an extra task
-			if extra == 0:
-				message += "\n A enviar o próximo desafio..."
-				team["current_task"] += 1
-				
-				# last task of a stage
-				if team["current_task"] >= len(self.game[team["current_stage"]]["tasks"]):
-					team["current_task"] = 0
-					team["current_stage"] += 1
-
-			# is an extra task
-			else:
-				message += f"\n Concluido o desafio extra {extra}"
-				team["extras_done"].append(extra)
-				team["current_extra"] = 0
+			message += "\n A enviar o próximo desafio..."
+			
 		
 		await gamemaster.send(gm_message)
 		await team["text"].send(message)
 
 		if accepted:
-			await self.send_task(guild, team)
+			await self.next_task(guild, team)
+
+	async def next_task(self, guild, team):
+		""" Send the next task to a team """
+
+		current_stage = team["current_stage"]
+
+		extra = team["current_extra"] + current_stage * 10
+		
+		# is not an extra task
+		if extra % 10 == 0:
+			team["current_task"] += 1
+			
+			# last task of a stage
+			if team["current_task"] >= len(self.game[team["current_stage"]]["tasks"]):
+				team_name = team["text"]
+				
+				await self.broadcast(guild, f"A {team_name} terminou o posto {current_stage}")
+
+				team["current_task"] = 0
+				team["current_stage"] += 1
+
+		# is an extra task
+		else:
+			team["extra_step"] += 1
+
+			# last task of a extra
+			if team["extra_step"] >= len(self.game[team["current_stage"]]["extra"][team["current_extra"]-1]):
+				await team["text"].send(f"\n Concluido o desafio extra {extra}")
+				team["extras_done"].append(extra)
+				team["current_extra"] = 0
+
+		await self.send_task(guild, team)
+
 
 def Haversine(lat1, lon1, lat2, lon2):
 	""" Calculates the distance in meters between 2 coords """
