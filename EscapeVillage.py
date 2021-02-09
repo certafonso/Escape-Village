@@ -305,14 +305,21 @@ class Client(discord.Client):
 			answer = task["answer"]
 			guess = " ".join(submission.content.split()[1:])
 
-			if guess == answer:
-				accepted = True
-				message += "Resposta aceite!"
+
+			if answer == None:
+					accepted = True
+					message += "Resposta registada!"
+					gm_message += f"`{guess}` Accepted: {accepted}"
 
 			else:
-				message += "Resposta errada."
-			
-			gm_message += f"Answer: `{guess}` Correct Answer: `{answer}` Accepted: `{accepted}`"
+				if guess == answer:
+					accepted = True
+					message += "Resposta aceite!"
+
+				else:
+					message += "Resposta errada."
+				
+				gm_message += f"Answer: `{guess}` Correct Answer: `{answer}` Accepted: `{accepted}`"
 		
 		elif task["type"] == "location":
 
@@ -332,6 +339,9 @@ class Client(discord.Client):
 
 			else:
 				message += "Resposta errada."
+
+				if task["feedback"]:
+					message += f"\nErraram por {error} metros."
 			
 			gm_message += f"Answer: `{guess}` Error: `{error}` Tolerance: `{tolerance}` Accepted: `{accepted}`"
 
@@ -370,7 +380,7 @@ class Client(discord.Client):
 			team["extra_step"] += 1
 
 			# last task of a extra
-			if team["extra_step"] >= len(self.game[team["current_stage"]]["extra"][team["current_extra"]-1]):
+			if team["extra_step"] >= len(self.game[team["current_stage"]]["extra"][team["current_extra"]-1]["tasks"]):
 				await team["text"].send(f"\n Concluido o desafio extra {extra}")
 				team["extras_done"].append(extra)
 				team["current_extra"] = 0

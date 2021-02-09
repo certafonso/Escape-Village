@@ -1,0 +1,478 @@
+[
+	{
+		"location": "Grupo 250 Mafra",
+		"tasks": [
+			{
+				"type": "photo",
+				"text": "Para comecar, enviem uma foto que comprove que serao a equipa vencedora.",
+				"validation_needed": false
+			},
+			{
+				"type": "location",
+				"text": "Antes de passarem para cada posto vao ter de encontrar as coordenadas do posto e envia-las. Vamos comecar por viajar ate a sede.",
+				"answer": 250,
+				"lat": 38.91794386910973, 
+				"lon": -9.320797031100197,
+				"tolerance": 30,
+				"feedback": false
+			},
+			{
+				"type": "int",
+				"text": "Alguns desafios requerem que ponham um numero certo, por exemplo, qual e o numero do vosso grupo?",
+				"answer": 250,
+				"tolerance": 0
+			},
+			{
+				"type": "string",
+				"text": "Outros desafios requerem que respondam uma palavra ou um texto, por exemplo, qual e o animal do vosso grupo?",
+				"answer": "gamo"
+			},
+			{
+				"type": "string",
+				"text": "Parabens! Estao quase no final do tutorial. So falta falar de desafios extra. Em todos os postos haverao alguns desafios extra que vos levam em viajens ate sitios interessantes proximos de voces. Experimentem ir ate ao exemplo. Quando todos acabarem eu dou-vos a palavra passe para comecarem a vossa viajem.",
+				"answer": "enlatadossaofixes"
+			},
+			{
+				"type": "location",
+				"text": "Para chegarem ao proximo posto vao apanhar um voo desde lisboa ate a capital do local de nascimento de Baden Powell.",
+				"lat": -22.810266287889487,  
+				"lon": -43.2362148404534,
+				"tolerance": 3000,
+				"feedback": false
+			}
+		],
+		"extra available": 3,
+		"extra": [
+			{
+				"category": "Exemplo",
+				"tasks": [
+					{
+						"type": "location",
+						"text": "Em cada desafio extra terao que descobrir ate onde vao, seguindo uma pista. Por exemplo, vao ate ao convento.",
+						"answer": 250,
+						"lat": 38.93699010153333, 
+						"lon": -9.325968967575102,
+						"tolerance": 30,
+						"feedback": false
+					},
+					{
+						"type": "string",
+						"text": "Na primeira fase do desafio extra terao de resonder a uma pergunta sobre o local. Se responderem acertadamente ganham 1 ponto. Por exemplo, de que cor e o convento?",
+						"answer": null
+					},
+					{
+						"type": "string",
+						"text": "Para terminar, terao de fazer um desafio que requer originalidade ou tecnicas escotistas. Por exemplo, deem um nome a vossa equipa.",
+						"answer": null
+					}
+				]
+			}
+		]
+	},
+	{
+		"location": "Rio de Janeiro",
+		"tasks": [
+			{
+				"type": "photo",
+				"text": "Bem vindos ao Rio de Janeiro, a capital do estado onde nasceu Baden Powell (o guitarrista, nao o fundador do escotismo, espero que nao tenham feito confusao). Estamos quase no carnaval portanto voces sao obrigados por lei a estar a sambar constantemente [Citation needed]. Por favor enviem-me um video curto a mostrar que estao a cumprir a lei.",
+				"validation_needed": false
+			},
+			{
+				"type": "string",
+				"text": "Agora que ja estamos dentro do espirito brasileiro, vamos ate um dos estabelecimentos mais famosos do Rio de Janeiro o ____________ ___________. \nPista: https://drive.google.com/file/d/1HS7owwyfJPA54BeEI4iLDDQCRWkoKv7C/view?usp=sharing",
+				"answer": "copacabana palace"
+			},
+			{
+				"type": "string",
+				"text": "Muito bem! Ja experienciaram o luxo do Copacabana Palace, vamos entao para a segunda coisa mais luxuosa do Rio de Janeiro, o metro! Viagem 13 estacoes e vao chegar a um local onde aconteceu um evento importante a alguns anos, as ___________.",
+				"answer": "olimpiadas"
+			},
+			{
+				"type": "location",
+				"text": "Exato, foram as olimpiadas de 2016, ja agora vamos para outra cidade anfitria dos jogos olimpicos... Mas estes foram boicotados por 3 grupos diferentes: \n\t- O Egito, Iraque, Camboja e Libano que estavam zangados com Israel, Reino Unido e a Franca \n\t- A Holanda, Espanha e Suica que estavam zangadas com a maneira como Uniao Sovietica estava a tratar a Hungria \n\t- A China, que estava zangada porque eles convidaram a China... \nViajem ate ao estadio onde tudo aconteceu (Os jogos, nao os boicotes).",
+				"lat": -37.81992498305377, 
+				"lon": 144.98344029236583,
+				"tolerance": 150,
+				"feedback": false
+			}
+		],
+		"extra available": 0,
+		"extra": [
+			{
+				"category": "Desertos",
+				"tasks": [
+					{
+						"type": "location",
+						"text": "Voces sabem o que e um deserto, certo? Aquelas cenas com areia, muito quente e sem agua... Bem aqui no Brasil ha uma cena dessas, so que, na epoca de chuvas, o deserto fica inundado. Vamos viajar ate la!",
+						"answer": 250,
+						"lat": -2.5290111230381833, 
+						"lon": -43.042538429835126,
+						"tolerance": 30000,
+						"feedback": false
+					},
+					{
+						"type": "string",
+						"text": "Bem vindos ao Parque Nacional dos Lencois Maranhenses, mas este parque nao serve so como parque natural... Tambem serve como estudio de cinema. Houve uma cena muito importante de um filme famoso a ser filmada aqui, qual?",
+						"answer": null
+					},
+					{
+						"type": "string",
+						"text": "Eu posso ou nao ter-me esquecido de fazer este desafio... Portanto o vosso desafio e criarem um desafio. (Enviem o texto com o desafio. A pontuacao depende da originalidade do desafio)",
+						"answer": null
+					}
+				]
+			},
+			{
+				"category": "Henry Ford",
+				"tasks": [
+					{
+						"type": "location",
+						"text": "\"Estou farto de comprar borracha da Malasia e ter de pagar impostos aos ingleses... Vou mas e criar uma comunidade no Brasil para produzir a minha propria borracha e assim nao pago impostos!\" - Henry Ford, 1927 (provavelmente...) Vamos viajar ate ao sitio que surgiu apos esta famosa frase.",
+						"lat": -3.828952139535839, 
+						"lon": -55.49691283448067,
+						"tolerance": 1000,
+						"feedback": false
+					},
+					{
+						"type": "string",
+						"text": "Bem vindos a Amazonia, mas como podem ver, aqui em Fordlandia nao ha la muita borracha... O que aconteceu?",
+						"answer": null
+					},
+					{
+						"type": "photo",
+						"text": "Este plano do Ford nao teve muito sucesso... Para comecar, a area nao era muito fertil e os gerentes dele nao sabiam muito bem o que estavam a fazer.  Alem disso, em 1930, os trabalhadores das plantacoes estavam insatisfeitos porque apenas recebiam uma alimentacao tipica americana, tipo hamburgueres e esse tipo de fast food, em vez de um tradicional arroz de feijao, entao decidiram fazer uma revolta. Encenem essa revolta e enviem um video com a vossa magnifica encenacao. (Provavelmente e boa ideia lerem mais um bocado sobre o assunto antes de o fazerem) (Devem enviar um video com menos de 3min. A pontuacao depende da originalidade e da quantidade de informaçao que apresentarem)",
+						"validation_needed": false
+					}
+				]
+			},
+			{
+				"category": "Estou Sozinho",
+				"tasks": [
+					{
+						"type": "location",
+						"text": "Vamos viajar para Norte, para uma vila nos estados unidos que apenas tem 1 habitante..",
+						"lat": 42.82890923925579, 
+						"lon": -98.32918720333689,
+						"tolerance": 200,
+						"feedback": false
+					},
+					{
+						"type": "string",
+						"text": "Apesar de ser possivelmente a vila mais pequena dos Estados Unidos, Manowi tem um recorde por ter o maior de alguma coisa, o que?",
+						"answer": null
+					},
+					{
+						"type": "photo",
+						"text": "Continuando no tema de coisas pequenas... Facam uma replica do nosso lenco na escala mais pequena que conseguirem (Devem enviar uma foto da replica com uma regua para escala. A pontuacao ira depender do quao pequeno for e da originalidade)",
+						"validation_needed": false
+					}
+				]
+			},
+			{
+				"category": "Micro Estados",
+				"tasks": [
+					{
+						"type": "location",
+						"text": "Caso nao saibam, microestados sao estados autoproclamados que dizem ser estados soberanos mas nao sao reconhecidos por nenhum pais a serio. Normalmente sao criados por razoes de protesto, como experiencias ou porque os criadores sao um bocado malucos. \nAqui na america do sul existe o microestado mais antigo do mundo, vamos viajar ate la.",
+						"lat": -34.92622311313095, 
+						"lon": -56.16120916885169,
+						"tolerance": 100,
+						"feedback": false
+					},
+					{
+						"type": "string",
+						"text": "Bem vindos a Parva Domus (do latim \"Casa Parva\"), que e mais uma sociedade recriativa que um pais... Mas da sempre jeito ter um terreno \"neutro\" para resover crises internacionais, quando e em que circunstancias e que isso aconteceu?",
+						"answer": null
+					},
+					{
+						"type": "string",
+						"text": "Vamos criar o nosso micro estado para o cla. Para comecar, deem um nome ao vosso estado, depois, a coisa mais importante para sucederem e terem o maior reconhecimento possivel. Tem ate ao final da atividade para conseguir o maior numero possivel de mensagens em video de pessoas a reconhecer o vosso estado como um estado independente. Por agora, apenas submetam o nome do vosso estado e ao longo da atividade vao encaminando para mim as mensagem das pessoas.",
+						"answer": null
+					}
+				]
+			}
+		]
+	},
+	{
+		"location": "Melbourne",
+		"tasks": [
+			{
+				"type": "photo",
+				"text": "Bem vindos a Australia, mas eu nao acredito que voces chegaram mesmo ate ver uma foto vossa com um Kangaroo.",
+				"validation_needed": false
+			},
+			{
+				"type": "int",
+				"text": "Muito bem! E ja que estamos no tema de kangoroos, neste estadio, para alem dos jogos olimpicos, tambem se joga Cricket, de facto foi aqui se jogou o primeiro jogo de test Cricket, uma das variadades mais longas do jogo... No entanto, sendo um jogo britanico, obviamente que eles fazem uma pausa para o cha... Se, enquanto eles estiverem a beber cha, eu decidir montar o meu kangoroo e ir dar uma volta, quantos kilometros eu conseguiria percorrer?",
+				"answer": 8,
+				"tolerance": 1
+			},
+			{
+				"type": "string",
+				"text": "No vosso passeio de kangoroo encontraram este homem. Ele esta relacionado com um superheroi, qual?\nhttps://drive.google.com/file/d/1t8onotGTCt7_56a7oRadgNXhYTPDGmJP/view?usp=sharing",
+				"answer": "batman"
+			},
+			{
+				"type": "location",
+				"text": "Ok, kangoroos, batman... isto tudo esta a tornar-se um bocado parvo... Para evitar danos permanentes nao ha pista para o proximo posto. Vao por tentativa erro... Pontos extra para quem conseguir adivinhar com menos tentativas :)",
+				"lat": 55.94390896454154, 
+				"lon": -3.269850816816746,
+				"tolerance": 200,
+				"feedback": true
+			}
+		],
+		"extra available": 0,
+		"extra": [
+			{
+				"category": "Coisas Longas",
+				"tasks": [
+					{
+						"type": "location",
+						"text": "Aqui nas redondezas, existe o local com o nome mais longo em paises que falam ingles. Vamos viajar ate la.",
+						"lat": -40.34407033341705, 
+						"lon": 176.56606039882874,
+						"tolerance": 4000,
+						"feedback": false
+					},
+					{
+						"type": "string",
+						"text": "Bem vindos a Taumata­whakatangihanga­koauau­o­tamatea­turi­pukaka­piki­maunga­horo­nuku­pokai­whenua­ki­tana­tah o local popularizado pelo famoso album dos The Bustermoon \"Going to Taumata­whakatangihanga­koauau­o­tamatea­turi­pukaka­piki­maunga­horo­nuku­pokai­whenua­ki­tana­tahu\". Mas o que é que este nome significa?",
+						"answer": null
+					},
+					{
+						"type": "photo",
+						"text": "E por falar em coisas longas, faaam a cadeia de nos mais longa que conseguirem, usando sempre nos diferentes. (Enviem um video a mostrar toda a cadeia. A pontuação dependera do numero de nos diferentes)",
+						"validation_needed": false
+					}
+				]
+			},
+			{
+				"category": "Florestas Especiais",
+				"tasks": [
+					{
+						"type": "location",
+						"text": "Aqui por perto existe uma floresta que tem os mesmo direitos legais que uma pessoa... Vamos ate la.",
+						"lat": -38.58714883800612,
+						"lon": 177.09907765513302,
+						"tolerance": 30000,
+						"feedback": false
+					},
+					{
+						"type": "string",
+						"text": "Bem vindos a Te Urewera, o primeiro recurso natural a ganhar os mesmo direitos legais que uma pessoa... Mas o que significa o nome Te Urewera para os locais?",
+						"answer": null
+					},
+					{
+						"type": "photo",
+						"text": "Uma floresta e um bom sitio para se camuflarem... Usando os ensinamentos deste video: https://www.youtube.com/watch?v=ZGv8oAHxekU camuflem-se. (Devem enviar uma foto onde ambos estejam camuflados. A pontuacao vai depender do quao bem estiverem camuflados e tambem da originalidade)",
+						"validation_needed": false
+					}
+				]
+			},
+			{
+				"category": "Montes Aborigenes",
+				"tasks": [
+					{
+						"type": "location",
+						"text": "Vamos viajar ate a um monte no meio do deserto autraliano sagrado para os aborigenes locais.",
+						"lat": -25.344599803704252,
+						"lon": 131.03620355149445,
+						"tolerance": 2000,
+						"feedback": false
+					},
+					{
+						"type": "string",
+						"text": "Bem vindo ao Uluru, esta formacao geologica e sagrada para os aborigenes locais e portanto existem algumas regras e coisas que eles nao gostam que os turistas facam. Uma delas a pincessa Diana fez. O que?",
+						"answer": null
+					},
+					{
+						"type": "photo",
+						"text": "Por falar em coisas altas, construam a torre mais alta que conseguirem. (Devem enviar uma foto da replica com uma regua (ou fita metrica se for o caso) para escala. A pontuacao ira depender do quao alta a torre for e da originalidade)",
+						"validation_needed": false
+					}
+				]
+			},
+			{
+				"category": "Mais Microestados",
+				"tasks": [
+					{
+						"type": "location",
+						"text": "Caso nao saibam, microestados sao estados autoproclamados que dizem ser estados soberanos mas nao sao reconhecidos por nenhum pais a serio. Normalmente sao criados por razoes de protesto, como experiencias ou porque os criadores sao um bocado malucos. \nEm 1620, um navio chamado Mayflower, transportou um grupo de cerca de 100 pessoas que se tornaram uns dos primeiros colonos onde sao hoje os Estados Unidos da America. Em 2004, algo parecido aconteceu aqui na Australia: um barco chamado Gayflower viajou ate a uma ilha nos recifes de coral e criaram um novo estado. Vamos viajar ate la.",
+						"lat": -23.25089001529442, 
+						"lon": 155.54026227496632,
+						"tolerance": 1000,
+						"feedback": false
+					},
+					{
+						"type": "string",
+						"text": "Nesse dia foi criado o Reino Gay e Lesbico das Ilhas do Mar do Coral, mas o que levou a criacao deste reino?",
+						"answer": null
+					},
+					{
+						"type": "photo",
+						"text": "Vamos criar o nosso micro estado para o cla. Qualquer estado que se preze tem um hino nacional... Criem o hino para o estado do cla. (Se fizeram os outros desafios dos microestados usem o mesmo nome, senao criem um nome para o vosso estado) (Enviem um video a entoar o vosso hino nacional)",
+						"validation_needed": false
+					}
+				]
+			}
+		]
+	},
+	{
+		"location": "Edimburgo",
+		"tasks": [
+			{
+				"type": "photo",
+				"text": "Bem vindos o Jardim Zoologico de Edimburgo! Este zoo foi o primeiro zoo do mundo a ter pinguins portanto vao tirar uma foto com os pinguins (de kilt, obviamente, nao se esquecam que estao na Escocia)",
+				"validation_needed": false
+			},
+			{
+				"type": "string",
+				"text": "Os primeiros pinguins deste zoo foram oferecidos pela noruega e, hoje em dia, um destes pinguins continua a ser muito importante para o exercito noruegues, qual e o seu nome?",
+				"answer": "nils olav III"
+			},
+			{
+				"type": "string",
+				"text": "Mas nao pensem que o Nils e o animal mais interessante que viveu neste zoo... Se entrarem nesta chamada vao ter a oportunidade de conhecer outro animal deste zoo. Para passarem ao proximo desafio terao de descobrir o nome dele. (Link da chamada de zoo: https://videoconf-colibri.zoom.us/j/87893328645?pwd=eDY1dWtkVnZDWTBMY0xxRFQ5b2tFZz09)",
+				"answer": "wojtek"
+			},
+			{
+				"type": "string",
+				"text": "Muito bem, e o Wojtek, mas quem e ele mesmo? Para pontos extra poe aqui o maximo de informacoes que conseguiram descobrir sobre ele.",
+				"answer": null
+			},
+			{
+				"type": "location",
+				"text": "Por falar em ursos, olhem este video que encontrei de ursos a trepar uma arvore: https://youtu.be/coXvEUlpH3M Este video faz-me lembrar de alguem... Vamos viajar ate ele!",
+				"lat": 60.171430020653176, 
+				"lon": 24.938309520557482,
+				"tolerance": 20000,
+				"feedback": false
+			}
+		],
+		"extra available": 0,
+		"extra": [
+			{
+				"category": "Autocarros",
+				"tasks": [
+					{
+						"type": "location",
+						"text": "Vamos imaginar que voces querem apanhar um autocarro, mas querem ver televisao enquanto esperam. Ate onde tem de ir?",
+						"lat": 60.76538878706876, 
+						"lon": -0.8346683055486264,
+						"tolerance": 40,
+						"feedback": false
+					},
+					{
+						"type": "string",
+						"text": "Bem vindos ao Unst Bus Shelter, que tem uma televisao e um sofa, mas a pergunta que se poe e: porque?",
+						"answer": null
+					},
+					{
+						"type": "photo",
+						"text": "Com a televisao, esta paragem de autocarro ja trata de vos entreter enquanto esperam pelo autocarro, mas o que vao fazer durante a viajem? Ja sei! Porque nao ouvir um podcast? Criem um episodio de um podcast em que entrevistem alguem que seja especialista numa area. (Devem enviar um video ou um audio com menos de 3min. A pontuação depende da qualidade do convidado e da originalidade das perguntas)",
+						"validation_needed": false
+					}
+				]
+			},
+			{
+				"category": "Mais animais militares",
+				"tasks": [
+					{
+						"type": "location",
+						"text": "Existe mais um animal a servir nas forcas armadas. E este tem o mesmo nome que um herdeiro ao trono... Vamos viajar ate ao sitio onde ele se reformou.",
+						"lat": 51.850187779822555,
+						"lon": -0.5427725988247675,
+						"tolerance": 200,
+						"feedback": false
+					},
+					{
+						"type": "string",
+						"text": "Em setembro de 2006 o capitao Simon Clarke declarou que \"Billy apresentou-se excecionalmente bem, ele teve todo o verao para refletir sobre seu comportamento no aniversario da Rainha e claramente fez por merecer a patente que ganhou\". Do que e que ele estava a falar?",
+						"answer": null
+					},
+					{
+						"type": "photo",
+						"text": "Apesar disto tudo, segundo os melhores analistas militares, animais nao sao a melhor escolha para liderar um exercito... Para nos mantermos no tema, façam uma construcao de pioneirismo com um material que não seja a melhor escolha para o fazer. (Devem enviar uma foto da construcao. A pontuacao depende da qualidade e originalidade da construção e tambem do quao absurdos forem os materiais)",
+						"validation_needed": false
+					}
+				]
+			},
+			{
+				"category": "Girlz not alowed",
+				"tasks": [
+					{
+						"type": "location",
+						"text": "E se eu vos dissesse que, na uniao europeia, existe a unica regiao do mundo onde nao e permitida a entrada de mulheres... Vamos viajar ate la.",
+						"lat": 40.27498237200482,
+						"lon": 24.215596969484228,
+						"tolerance": 20000,
+						"feedback": false
+					},
+					{
+						"type": "string",
+						"text": "Bem vindos ao monte Athos, que abriga 20 mosteiros ortodoxos, e apenas homens com mais de 18 anos podem visitar. Mas algo que toda a gente pode visitar e o monte Rushmore e este monte quase se tornou uma versao grega dele. Quem teve essa ideia e quem e que ele queria esculpir?",
+						"answer": null
+					},
+					{
+						"type": "photo",
+						"text": "Pensando bem isso e uma boa ideia... Vao ate ao monte mais proximo e esculpam um busto de BP! Ok, se calhar com a quarentena isso nao e posivel... Entao usem so algo que tiverem ai a mao, I guess.... (Devem enviar uma foto do busto. A pontuacao depende da qualidade e originalidade do busto)",
+						"validation_needed": false
+					}
+				]
+			},
+			{
+				"category": "Ainda Mais Microestados",
+				"tasks": [
+					{
+						"type": "location",
+						"text": "Caso nao saibam, microestados sao estados autoproclamados que dizem ser estados soberanos mas nao sao reconhecidos por nenhum pais a serio. Normalmente sao criados por razoes de protesto, como experiencias ou porque os criadores sao um bocado malucos. \nAqui no reino unido existe um microestado que foi criado para uma serie de televisao. Vamos viajar ate a cidade onde este estado foi criado.",
+						"lat": 51.53220436082473, 
+						"lon": -0.030993863831490918,
+						"tolerance": 10000,
+						"feedback": false
+					},
+					{
+						"type": "string",
+						"text": "Quem e o ministro da defesa deste estado e porque e que foi contratado?",
+						"answer": null
+					},
+					{
+						"type": "photo",
+						"text": "Vamos criar o nosso micro estado para o cla. Algo essencial para um pais e tambem ter uma bandeira. Criem uma bandeira para o vosso micro estado. (Se fizeram os outros desafios dos microestados usem o mesmo nome, senao criem um nome para o vosso estado)",
+						"validation_needed": false
+					}
+				]
+			}
+		]
+	},
+	{
+		"location": "Helsinki",
+		"tasks": [
+			{
+				"type": "int",
+				"text": "Parabens! Conseguiram conquistar o objetivo secreto desta atividade: encontrar o Goncalo. Agora acabou.\nhttps://www.youtube.com/watch?v=baHsoEAAMZU",
+				"answer": 42,
+				"tolerance": 0
+			},
+			{
+				"type": "int",
+				"text": "Parabens! Conseguiram encontrar o easter egg, mas agora acabou mesmo",
+				"answer": 69,
+				"tolerance": 0
+			},
+			{
+				"type": "int",
+				"text": "Voces sao presistentes... Mas parem, que nao ha mesmo mais nada.",
+				"answer": 420,
+				"tolerance": 0
+			},
+			{
+				"type": "strinng",
+				"text": "https://www.youtube.com/watch?v=2k0SmqbBIpQ",
+				"answer": "420"
+			}
+		],
+		"extra available": 100,
+		"extra": []
+	}
+]
